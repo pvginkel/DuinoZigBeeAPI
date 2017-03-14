@@ -384,7 +384,7 @@ void Simple_Desc_req()                                                        //
 {
   //***************************************
   // Simple_Desc_rsp Cluster 0x8004 on page 159 of ZBSpec
-  // A Simple Description Request packet cluster 0x0004 is used to discover the configuraiton of an end point. The results of this command are
+  // A Simple Description Request packet cluster 0x0004 is used to discover the configuration of an end point. The results of this command are
   // retuned in a Simple_Desc_res packet cluster 0x8004 that contains the ZigBee Proflie, ZigBee Device Type, and a list of inbound and
   // outbound clusters for the requested end point.  This command is sent once for each end point to discover all services available.
   //***************************************
@@ -675,7 +675,7 @@ void sendDefaultResponse(byte CmdID, byte Status, byte EndPoint)
 
 ////                                 --------------------------------------------- Transaction seq number
 ////                                |     ---------------------------------------- Status 0x00 = success Table 2.94 on page 161 of ZBSpec
-////                                |    |     ----------------------------------- Network address of intrestes 2 bytes little endian order page 161 of ZBSpec
+////                                |    |     ----------------------------------- Network address of interest 2 bytes little endian order page 161 of ZBSpec
 ////                                |    |    |    |     ------------------------- Active EndPoint count page 161 of ZBSpec
 ////                                |    |    |    |    |     -------------------- Attribute EndPoint List page 161 of ZBSpec
 ////                                |    |    |    |    |    |
@@ -683,11 +683,11 @@ void sendDefaultResponse(byte CmdID, byte Status, byte EndPoint)
 
 ////                                 ---------------------------------------------------------------------- Transaction seq number
 ////                                |     ----------------------------------------------------------------- Status 0x00 = success Table 2.93 on page 159 of ZBSpec
-////                                |    |     ------------------------------------------------------------ Network address of intrestes 2 bytes little endian order page 161 of ZBSpec
+////                                |    |     ------------------------------------------------------------ Network address of interest 2 bytes little endian order page 161 of ZBSpec
 ////                                |    |    |    |     -------------------------------------------------- Length in bytes of the Simple Descriptor to Follow
 ////                                |    |    |    |    |     --------------------------------------------- Endpoint of the simple descriptor Table 2.38 on page 88 of ZBSpec
-////                                |    |    |    |    |    |     ---------------------------------------- Applicaiton Profile ID 2 Bytes Little endian. 0x0104 = Home Automation Profile
-////                                |    |    |    |    |    |    |    |     ------------------------------ Applicaiton device identifier 2 Bytes Little endian, 0x0002 = On/Off Output See Table 5.1 on page 17 of ZigBee Home Automation Profile
+////                                |    |    |    |    |    |     ---------------------------------------- Application Profile ID 2 Bytes Little endian. 0x0104 = Home Automation Profile
+////                                |    |    |    |    |    |    |    |     ------------------------------ Application device identifier 2 Bytes Little endian, 0x0002 = On/Off Output See Table 5.1 on page 17 of ZigBee Home Automation Profile
 ////                                |    |    |    |    |    |    |    |    |    |     -------------------- App Dev Version 4bits + reserved 4bits
 ////                                |    |    |    |    |    |    |    |    |    |    |     --------------- Input cluster count in this case we only have 0x01 input clusters
 ////                                |    |    |    |    |    |    |    |    |    |    |    |     ---------- Input cluster list 2 bytes each little endian. 0x0006 = OnOff Cluster Page 125 of ZCL
