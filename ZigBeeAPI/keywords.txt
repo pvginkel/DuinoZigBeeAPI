@@ -1,0 +1,36 @@
+#######################################
+# Syntax Coloring Map For ZigBeeAPI
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+ZigBeeAPI	KEYWORD1
+
+#######################################
+# Public Methods / Functions 
+#######################################
+RxFlush	KEYWORD2
+TX	KEYWORD2
+TX	Indirect KEYWORD2
+RX	KEYWORD2
+AT	KEYWORD2
+ATByte	KEYWORD2
+ATqueue	KEYWORD2
+_PktData	KEYWORD2
+_PktDataSize	KEYWORD2
+_PktIEEEAddHi	KEYWORD2
+_PktIEEEAddLo	KEYWORD2
+_PktNetAdd	KEYWORD2
+_PktDEP	KEYWORD2
+_PktSEP	KEYWORD2
+_PktProfile	KEYWORD2
+_PktCluster	KEYWORD2
+_ReadLog	KEYWORD2
+#######################################
+# Constants (LITERAL1)
+#######################################
+BufferSize	LITERAL1	Constants
+xBuffSize	LITERAL1 Constants
+strBuffSize	LITERAL1	Constants
