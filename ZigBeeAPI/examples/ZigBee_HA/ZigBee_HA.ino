@@ -597,7 +597,7 @@ void clstr_OnOff()                                                            //
     Buffer[6] = 0x10;                                                         // Attribute Data Type 0x10 = Boolean, see Table 2.16 on page 54 of ZCL
 
 
-    Buffer[7] = pinState(LEDPin);                                          // Attribute Data Field in this case 0x00 = Off, see Table 3.40 on page 126 of ZCL. Set the on / off status based on pin
+    Buffer[7] = pinState(LEDPin);                                             // Attribute Data Field in this case 0x00 = Off, see Table 3.40 on page 126 of ZCL. Set the on / off status based on pin
     Serial.println();
     Serial.print(F("Read attribute request, sending result. LED is "));
     if (pinState(LEDPin) == true)
