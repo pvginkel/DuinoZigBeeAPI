@@ -82,6 +82,8 @@ Conversation overview of the initial connection to the SmartThings home automati
   byte Buffer[BufferSize];
   word LclNet=0;
   unsigned long LclIeeeLo = 0, LclIeeeHi =0, now=0;
+
+bool pinState(byte pin) {return (0!=(*portOutputRegister(digitalPinToPort(pin)) & digitalPinToBitMask(pin)));};
   
 void Tx_Device_annce()                                                        // ZDO Cluster 0x0013 Device_annce
 {
@@ -595,10 +597,10 @@ void clstr_OnOff()                                                            //
     Buffer[6] = 0x10;                                                         // Attribute Data Type 0x10 = Boolean, see Table 2.16 on page 54 of ZCL
 
 
-    Buffer[7] = digitalRead(LEDPin);                                          // Attribute Data Field in this case 0x00 = Off, see Table 3.40 on page 126 of ZCL. Set the on / off status based on pin
+    Buffer[7] = pinState(LEDPin);                                          // Attribute Data Field in this case 0x00 = Off, see Table 3.40 on page 126 of ZCL. Set the on / off status based on pin
     Serial.println();
-    Serial.print(F("Read attribute requst, sending result LED is "));
-    if (digitalRead(LEDPin) == 1)
+    Serial.print(F("Read attribute request, sending result. LED is "));
+    if (pinState(LEDPin) == true)
     {
       Serial.print(F("on."));
     }
