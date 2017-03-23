@@ -633,7 +633,7 @@ void clstr_OnOff()                                                            //
 
   if (frmType == 0x01 && cmdID == 0x02 && attributeID == 0x00)                // Toggle device
   {
-    digitalWrite(LEDPin,!digitalRead(LEDPin));                                // Toggle Output
+    digitalWrite(LEDPin,!pinState(LEDPin));                                   // Toggle Output
     sendDefaultResponse(cmdID, 0x00, 0x38);                                   // Send Default response back to originator of command
     Serial.println();
     Serial.print(F("LED Toggle"));
