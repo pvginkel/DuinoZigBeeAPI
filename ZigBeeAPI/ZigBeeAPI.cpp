@@ -105,7 +105,7 @@ void LOG(const char LogTxtAdd[])
 }
 void ZigBeeAPI::RxFlush()
 {
-	//***************************************
+  //***************************************
   // Flush receive buffer
   //***************************************
   while(available()) read();
@@ -118,20 +118,20 @@ boolean ZigBeeAPI::TX(long DAddHi, long DAddLo, word NetAdd, byte sEP, byte dEP,
   // Send StrPtr to DAddHi DAddLo and net address.
   // DAddHi(Long) = high 32 bits of 64 bit IEEE destination
   // DaddLo(Long) = low 32 bits of 64 bit IEEE destination
-  //   set DAddHi = %0000_0000 and DaddLo = %0000_0000 to send packet to coordinator
-  //   set DAddHi = %0000_0000 and DaddLo = %0000_FFFF to broadcast
+  //   set DAddHi = 0x0000_0000 and DaddLo = 0x0000_0000 to send packet to coordinator
+  //   set DAddHi = 0x0000_0000 and DaddLo = 0x0000_FFFF to broadcast
   // NetAdd(Word) = 16 bit network address of destination.
-  //   set NetAdd to %FFFE = if destination network address unknown
-  //   set NetAdd to %FFFC = broadcast to all routers
-  //   set NetAdd to %FFFD = broadcast to all non-sleeping devices
-  //   set NetAdd to %FFFF = broadcast to all devices
+  //   set NetAdd to 0xFFFE = if destination network address unknown
+  //   set NetAdd to 0xFFFC = broadcast to all routers
+  //   set NetAdd to 0xFFFD = broadcast to all non-sleeping devices
+  //   set NetAdd to 0xFFFF = broadcast to all devices
   // sEP(Byte) = Source End Point
   // dEP(Byte) = Destination End Point
   // Prfl(Word) = Profile ID
   // Clstr(Word) = ZigBee Cluster number
   // BuffAdd(memory pointer) = memory pointer of byte aligned payload data to be sent
   // BuffSize(Word) = size of payload data. Must be equal to or less than xBuffSize - 20 bytes to or it will be truncated.
-  // returns true=Success
+  // returns true = Success
   //***************************************
   word Size = 0;
   memset(xBuff, 0, xBuffSize);
@@ -321,7 +321,7 @@ int ZigBeeAPI::RX(int TimeMS)
   {
   	if (TimeMS == 0)
     {
-    	while(available() < 1){}                          // Read with no time limits
+    	while(available() < 1){}                        // Read with no time limits
     }
     else
 	  {
@@ -329,7 +329,7 @@ int ZigBeeAPI::RX(int TimeMS)
 		  while (int((millis() - start)) < TimeMS && available()<1){}    // Wait for TimeMS 
 		}
 		x = read();
-	  if (x == -1) return -2;                             // Return error timeout waiting for data
+	  if (x == -1) return -2;                       // Return error timeout waiting for data
     xBuff[min(i,xBuffSize)] = x;
     #if _DEBUG
       Serial.print(" ");
@@ -510,7 +510,7 @@ boolean ZigBeeAPI::ATbyte(const char *CmdStrPtr, byte ValueByte)
 
 boolean ZigBeeAPI::ATqueue(const char *CmdStrPtr, const uint8_t ByteArryPtr[], word ArrySize)
 {
-	//***************************************
+  //***************************************
   // Send two letter AT command plus data in a ByteArray to xBee queued.  Must be followed with a WR and AC command
   // CmdStrPtr(memory pointer) is the address of the two character AT command
   // ByteArryPtr is the address of a byte array to send
@@ -550,7 +550,7 @@ boolean ZigBeeAPI::ATqueue(const char *CmdStrPtr, const uint8_t ByteArryPtr[], w
   #endif
   for (int i=0; i <= (Size + 3); i++)
   {                           
-    write(xBuff[i]);                            // Transmit packet byte at a time
+    write(xBuff[i]);                                    // Transmit packet byte at a time
   }
   return true;
 }
@@ -558,10 +558,10 @@ boolean ZigBeeAPI::ATqueue(const char *CmdStrPtr, const uint8_t ByteArryPtr[], w
 byte * ZigBeeAPI::_PktData()
 {
   //***************************************
-  //returns a pointer to a buffer containing packet data
-  //Max size will never exceed 101 bytes
-  //CAUTION! xBuff is used in other methods and will be overwritten. Therefor the
-  //data in this buffer should be copied to a local buffer.
+  // Returns a pointer to a buffer containing packet data
+  // Max size will never exceed 101 bytes
+  // CAUTION! xBuff is used in other methods and will be overwritten. Therefore the
+  // data in this buffer should be copied to a local buffer.
   //***************************************
   return xBuff;
 }
@@ -569,10 +569,10 @@ byte * ZigBeeAPI::_PktData()
 int ZigBeeAPI::_PktDataSize()
 {
   //***************************************
-  //returns the size of the _PktData
-  //Max size will never exceed 101 bytes
-  //CAUTION! xBuff is used in other methods and will be overwritten. Therefor the
-  //data in this buffer should be copied to a local buffer.
+  // Returns the size of the _PktData
+  // Max size will never exceed 101 bytes
+  // CAUTION! xBuff is used in other methods and will be overwritten. Therefore the
+  // data in this buffer should be copied to a local buffer.
   //***************************************
   return xBuffPayloadSize + 1;
 }
@@ -580,7 +580,7 @@ int ZigBeeAPI::_PktDataSize()
 long ZigBeeAPI::_PktIEEEAddHi()
 {
   //***************************************
-  //returns a long containing the upper half of the IEEE address of last packet
+  // Returns a long containing the upper half of the IEEE address of last packet
   //***************************************
   return S_IAddHi;
 }
@@ -588,7 +588,7 @@ long ZigBeeAPI::_PktIEEEAddHi()
 long ZigBeeAPI::_PktIEEEAddLo()
 {
   //***************************************
-  //returns a long containing the lower half of the IEEE address of last packet
+  // Returns a long containing the lower half of the IEEE address of last packet
   //***************************************
   return S_IAddLo;
 }
@@ -596,7 +596,7 @@ long ZigBeeAPI::_PktIEEEAddLo()
 long ZigBeeAPI::_PktNetAdd()
 {
   //***************************************
-  //returns a long containing the network address of last packet
+  // Returns a long containing the network address of last packet
   //***************************************
   return S_NAdd;
 }
@@ -604,7 +604,7 @@ long ZigBeeAPI::_PktNetAdd()
 byte ZigBeeAPI::_PktDEP()
 {
   //***************************************
-  //returns a byte containing the Destination End Point of last packet
+  // Returns a byte containing the Destination End Point of last packet
   //***************************************
   return S_DEP;
 }
@@ -612,7 +612,7 @@ byte ZigBeeAPI::_PktDEP()
 byte ZigBeeAPI::_PktSEP()
 {
   //***************************************
-  //returns a byte containing the Source End Point of last packet
+  // Returns a byte containing the Source End Point of last packet
   //***************************************
   return S_SEP;
 }
@@ -620,7 +620,7 @@ byte ZigBeeAPI::_PktSEP()
 word ZigBeeAPI::_PktProfile()
 {
   //***************************************
-  //returns a word containing the Profile ID of last packet
+  // Returns a word containing the Profile ID of last packet
   //***************************************
   return S_Profile;
 }
@@ -628,7 +628,7 @@ word ZigBeeAPI::_PktProfile()
 word ZigBeeAPI::_PktCluster()
 {
   //***************************************
-  //returns a word containing the Cluster ID of last packet
+  // Returns a word containing the Cluster ID of last packet
   //***************************************
   return S_Cluster;
 }
@@ -636,7 +636,7 @@ word ZigBeeAPI::_PktCluster()
 byte * ZigBeeAPI::_ReadLog()
 {
   //***************************************
-  //returns a pointer to the last logged item
+  // Returns a pointer to the last logged item
   //***************************************
   return strBuff;
 }
