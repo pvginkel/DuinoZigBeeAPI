@@ -393,10 +393,10 @@ int ZigBeeAPI::RX(int TimeMS)
   }
   else if (xBuff[3] == 0x88)                            // API Identifier: 0x88 = AT Frame Type
   {
-  	if (xBuff[7] == 0x00 && PktSize > 0x05)             // Byte 7 is command status for AT command Response 00 = OK
+  	if (xBuff[7] == 0x00 && PktSize > 0x05)         // Byte 7 is command status for AT command Response 00 = OK
     {
       x = PktSize - 5;                                  // Set x to the data size in bytes
-    	memcpy(&xBuff[0], &xBuff[8], x);                  // Move packet data frame to begining of xBuff
+    	memcpy(&xBuff[0], &xBuff[8], x);                // Move packet data frame to beginning of xBuff
       memset(xBuff+x, 0, xBuffSize-x);                  // Fill remaining bytes with 0
       return true;
     }
@@ -408,6 +408,11 @@ int ZigBeeAPI::RX(int TimeMS)
     {
       LOG("Err RX AT Cmd");
     }
+  }
+  else if (xBuff[3] == 0xA3)                            // "Many-to-One" route request
+  {
+  	LOG("\"Many-to-One\" route request");
+	return false;
   }
   else
   {
