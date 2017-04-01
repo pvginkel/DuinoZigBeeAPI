@@ -297,7 +297,7 @@ void loop()
     for (int x=0;  x <= zb._PktDataSize(); x++)
     {
       printByteData(zb._PktData()[x]);
-      if (x != zb._PktDataSize())
+      if (x < zb._PktDataSize()-1)
       {
         Serial.print(" ");
       }
@@ -327,7 +327,7 @@ void loop()
     for (int i=0; i <= zb._PktDataSize(); i++)
     {
       printByteData(byte(zb._PktData()[i]));
-      if (i != zb._PktDataSize())
+      if (i < zb._PktDataSize()-1)
       {
         Serial.print(" ");
       }
