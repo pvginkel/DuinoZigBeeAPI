@@ -42,7 +42,7 @@ char strBuff[strBuffSize];
 word xBuffPayloadSize = 0;
 
 #if _DEBUG
-void PrintHex(uint8_t *data, uint8_t length) // prints 8-bit data in hex
+void PrintHex(uint8_t *data, uint8_t length)            // prints 8-bit data in hex
 {
   for (int i=0; i<=length; i++)
   {
@@ -263,7 +263,7 @@ int ZigBeeAPI::RX(int TimeMS)
   unsigned long start=0;
   if (TimeMS == 0)
   {
-    while(available()<1) {}                     // Read with no time limit
+    while(available()<1) {}                             // Read with no time limit
     TmpReadBuff[0] = read();
   }
   else
@@ -283,7 +283,7 @@ int ZigBeeAPI::RX(int TimeMS)
   for (int i=1; i <= 2; i++)
   {
     while(available() < 1){}
-    TmpReadBuff[i] = read();                    // Read next 2 bytes into temp long
+    TmpReadBuff[i] = read();                            // Read next 2 bytes into temp long
   }
 
   if (TmpReadBuff[0] == 0x7E)                           // Check for Start Delimiter
@@ -321,7 +321,7 @@ int ZigBeeAPI::RX(int TimeMS)
   {
   	if (TimeMS == 0)
     {
-    	while(available() < 1){}                        // Read with no time limits
+    	while(available() < 1){}                          // Read with no time limits
     }
     else
 	  {
@@ -329,7 +329,7 @@ int ZigBeeAPI::RX(int TimeMS)
 		  while (int((millis() - start)) < TimeMS && available()<1){}    // Wait for TimeMS 
 		}
 		x = read();
-	  if (x == -1) return -2;                       // Return error timeout waiting for data
+	  if (x == -1) return -2;                             // Return error timeout waiting for data
     xBuff[min(i,xBuffSize)] = x;
     #if _DEBUG
       Serial.print(" ");
@@ -393,10 +393,10 @@ int ZigBeeAPI::RX(int TimeMS)
   }
   else if (xBuff[3] == 0x88)                            // API Identifier: 0x88 = AT Frame Type
   {
-  	if (xBuff[7] == 0x00 && PktSize > 0x05)         // Byte 7 is command status for AT command Response 00 = OK
+    if (xBuff[7] == 0x00 && PktSize > 0x05)             // Byte 7 is command status for AT command Response 00 = OK
     {
       x = PktSize - 5;                                  // Set x to the data size in bytes
-    	memcpy(&xBuff[0], &xBuff[8], x);                // Move packet data frame to beginning of xBuff
+    	memcpy(&xBuff[0], &xBuff[8], x);                  // Move packet data frame to beginning of xBuff
       memset(xBuff+x, 0, xBuffSize-x);                  // Fill remaining bytes with 0
       return true;
     }
@@ -412,6 +412,7 @@ int ZigBeeAPI::RX(int TimeMS)
   else if (xBuff[3] == 0xA3)                            // "Many-to-One" route request
   {
   	LOG("\"Many-to-One\" route request");
+  	xBuffPayloadSize = PktSize + 3;
 	return false;
   }
   else
@@ -505,7 +506,7 @@ boolean ZigBeeAPI::ATbyte(const char *CmdStrPtr, byte ValueByte)
   {
     write(xBuff[i]);
   }
- if (RX(1000) == 1) return true; else return false;      // Check for AT response and return result
+ if (RX(1000) == 1) return true; else return false;     // Check for AT response and return result
 }
 
 boolean ZigBeeAPI::ATqueue(const char *CmdStrPtr, const uint8_t ByteArryPtr[], word ArrySize)
