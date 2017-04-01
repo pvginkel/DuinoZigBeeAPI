@@ -124,7 +124,7 @@ void ZCLpkt()
       clstr_Basic();                                                          // Basic Cluster Page 78 of ZigBee Cluster Library
       break;
     case 0x0006:
-      clstr_OnOff();                                                          // On/Off Cluser Page 125 of ZigBee Cluster Library
+      clstr_OnOff();                                                          // On/Off Cluster Page 125 of ZigBee Cluster Library
       break;
   }
 }
