@@ -296,7 +296,7 @@ void loop()
     Serial.print("->");
     for (int x=0;  x <= zb._PktDataSize(); x++)
     {
-      Serial.print(byte(zb._PktData()[x]),HEX);
+      printByteData(zb._PktData()[x]);
       if (x != zb._PktDataSize())
       {
         Serial.print(" ");
@@ -327,7 +327,7 @@ void loop()
     for (int i=0; i <= zb._PktDataSize(); i++)
     {
       printByteData(byte(zb._PktData()[i]));
-      if (i != xBuffSize)
+      if (i != zb._PktDataSize())
       {
         Serial.print(" ");
       }
