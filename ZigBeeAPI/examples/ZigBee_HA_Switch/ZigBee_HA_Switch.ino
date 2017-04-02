@@ -189,7 +189,7 @@ void setup()
   Serial1.begin(xBeeBaud);
   while (!Serial)
   {
-    ; // wait for serial port to connect. Needed for native USB port only
+    delay(1); // wait for serial port to connect. Needed for native USB port only
   }
   Serial.println();
   Serial.println(F("On Line."));
