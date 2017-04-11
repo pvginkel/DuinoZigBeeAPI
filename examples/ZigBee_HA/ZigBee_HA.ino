@@ -217,7 +217,7 @@ void setup()
   
   //***************************************
   // Read xBee's address settings and store in memory
-  // The xBee's 64 bit IEEE address is in ROM on the xBee and will never changed (SH & SL = IEEE Address)
+  // The xBee's 64 bit IEEE address is in ROM on the xBee and will never change (SH & SL = IEEE Address)
   // The xBee's 16 bit network address (MY address) is set by the ZigBee coordinator and may change at any time
   //**************************************
   Serial.println();
