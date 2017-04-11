@@ -387,7 +387,7 @@ void Simple_Desc_req()                                                        //
   //***************************************
   // Simple_Desc_rsp Cluster 0x8004 on page 159 of ZBSpec
   // A Simple Description Request packet cluster 0x0004 is used to discover the configuration of an end point. The results of this command are
-  // retuned in a Simple_Desc_res packet cluster 0x8004 that contains the ZigBee Proflie, ZigBee Device Type, and a list of inbound and
+  // retuned in a Simple_Desc_res packet cluster 0x8004 that contains the ZigBee Profile, ZigBee Device Type, and a list of inbound and
   // outbound clusters for the requested end point.  This command is sent once for each end point to discover all services available.
   //***************************************
   byte epToRpt = byte(zb._PktData()[3]);                                      // End Point to report Simple Desc on
