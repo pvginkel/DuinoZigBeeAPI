@@ -634,7 +634,7 @@ void clstr_OnOff()                                                            //
   frmType = frmType & 3;                                                      // Bitwise AND (&) with a mask to make sure we are looking at first two bits
   seqNum = byte(zb._PktData()[1]);                                            // Transaction seq number can be any value used in return packet to match a response to a request
   cmdID = byte(zb._PktData()[2]);                                             // Command ID Byte P16 of ZCL
-  attributeID = byte(zb._PktData()[4]);                                       // Attribute ID Word(little endin) P126 of ZCL
+  attributeID = byte(zb._PktData()[4]);                                       // Attribute ID Word(little endian) P126 of ZCL
   attributeID = (attributeID << 8) + byte(zb._PktData()[3]);                                       
 
   if (frmType == 0x00 && cmdID == 0x00 && attributeID == 0x00)                // frmType = 0x00 (General Command Frame see Table 2.9 on P16 of ZCL)
