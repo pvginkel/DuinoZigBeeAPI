@@ -13,8 +13,8 @@
 // written in the Propeller Spin language
 // by John.Rucker(at)Solar-Current.com
 //***********************************************
-#include <ZigBeeAPI.h>
-#define _DEBUG 0
+#include "ZigBeeAPI.h"
+#define _DEBUG 1
 
 /*
 Hardware requirements:
@@ -59,16 +59,18 @@ Conversation overview of the initial connection to the SmartThings home automati
   //
   // SoftwareSerial is not needed on Leonardo, or Mega. Attach the xBee to pins 0 & 1 of the Leonardo, or pins 19, & 18 of the Mega.
   // No other changes are required.
+#define IO_XBEE_RX 2
+#define IO_XBEE_TX 3
   
   // Async config
-  int xBeeTx=2;     // This is the Arduino pin connected to the xBee's transmit pin. Not needed for Leonardo or Mega
-  int xBeeRx=3;     // This is the Arduino pin connected to the xBee's receive pin. Not needed for Leonardo or Mega
+  int xBeeTx= IO_XBEE_TX;     // This is the Arduino pin connected to the xBee's transmit pin. Not needed for Leonardo or Mega
+  int xBeeRx= IO_XBEE_RX;     // This is the Arduino pin connected to the xBee's receive pin. Not needed for Leonardo or Mega
   int xBeeBaud=9600;// The baud rate of the xBee must match this number (set with the xBee's BD command)
   int xBeeReset=12; // This is the Arduino pin connected to the xBee's reset pin, not needed if using soft reset (AT FR)
   #if !defined (__AVR_ATmega32U4__) && !defined (__MK20DX128__)
-    SoftwareSerial Serial1(xBeeTx, xBeeRx);
+    SoftwareSerial xbeeSerial(xBeeTx, xBeeRx);
   #endif                  
-  ZigBeeAPI zb(Serial1);
+  ZigBeeAPI zb(xbeeSerial);
 
   byte AppVersion = 1;               // Application version
   byte HardwareVersion = 1;          // Hardware version
@@ -143,8 +145,10 @@ void setup()
   //***************************************
   // Start Serial Monitor Communications
   //***************************************
-  Serial.begin(9600);
-  Serial1.begin(xBeeBaud);
+  while (!Serial);
+  Serial.begin(115200);
+  Serial.println("Starting...");
+  xbeeSerial.begin(xBeeBaud);
   while (!Serial)
   {
     delay(1); // wait for serial port to connect. Needed for native USB port only

@@ -12,8 +12,8 @@
 // of the same name written in the Propeller Spin language
 // by John.Rucker(at)Solar-Current.com
 //***********************************************
-#include <ZigBeeAPI.h>
-#define _DEBUG 0
+#include "ZigBeeAPI.h"
+#define _DEBUG 1
 
 ZigBeeAPI::ZigBeeAPI(Stream& port) : _port(&port){};
 void ZigBeeAPI::begin(Stream &serial) {_port = &serial;}
